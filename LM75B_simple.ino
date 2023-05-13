@@ -1,6 +1,7 @@
 #include <Wire.h>
 
-#define WRITE_THEN_READ
+//#define READ_TRANSACTION_ONLY
+//#define WAIT_END_OF_SETUP
 
 class LM75B {
 public:
@@ -10,10 +11,11 @@ public:
   ~LM75B() {}
 
   float read(void) {
-    uint8_t tx[1] = { 0x00 };
     uint8_t rx[2];
-    
-#ifdef WRITE_THEN_READ
+
+#ifndef READ_TRANSACTION_ONLY
+    uint8_t tx[1] = { 0x00 };
+
     wire.beginTransmission(addr);
     wire.write(tx, sizeof(tx));
     wire.endTransmission(false);
@@ -38,6 +40,10 @@ void setup() {
   Wire.begin();
   Serial.begin(9600);
   Serial.println("\r***** Hello, LM75B! *****");
+
+#ifdef WAIT_END_OF_SETUP
+  delay(1000);
+#endif
 }
 
 void loop() {
