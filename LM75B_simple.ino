@@ -1,7 +1,7 @@
 #include <Wire.h>
 
-//#define READ_TRANSACTION_ONLY
-//#define WAIT_END_OF_SETUP
+#define READ_TRANSACTION_ONLY
+#define WAIT_END_OF_SETUP
 
 class LM75B {
 public:
