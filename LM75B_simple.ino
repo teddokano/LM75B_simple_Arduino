@@ -48,6 +48,5 @@ void setup() {
 
 void loop() {
   Serial.println(sensor.read());
-  sensor.read();
   delay(1000);
 }
